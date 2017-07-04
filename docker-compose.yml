@@ -1,0 +1,45 @@
+version: '2'
+services:
+
+  roach1:
+    image: cockroachdb/cockroach:v1.0.2
+    hostname: roach1
+    ports:
+      - 8080:8080
+      - 26257:26257
+    volumes:
+      - "${PWD}/data/roach1:/cockroach/cockroach-data"
+    command: "start --insecure"
+    networks:
+      roachnet:
+
+  roach2:
+    image: cockroachdb/cockroach:v1.0.2
+    hostname: roach2
+    volumes:
+      - "${PWD}/data/roach2:/cockroach/cockroach-data"
+    command: "start --insecure --join=roach1"
+    networks:
+      roachnet:
+    depends_on:
+      - roach1
+
+  roach3:
+    image: cockroachdb/cockroach:v1.0.2
+    hostname: roach3
+    volumes:
+      - "${PWD}/data/roach3:/cockroach/cockroach-data"
+    command: "start --insecure --join=roach1"
+    networks:
+      roachnet:
+    depends_on:
+      - roach1
+
+networks:
+  roachnet:
+    ipam:
+      driver: default
+      config:
+      - subnet: 172.47.0.0/16
+        ip_range: 172.47.5.0/24
+        gateway: 172.47.0.1
