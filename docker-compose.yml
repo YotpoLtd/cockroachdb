@@ -2,7 +2,7 @@ version: '2'
 services:
 
   roach1:
-    image: cockroachdb/cockroach:v1.0.2
+    image: cockroachdb/cockroach:v1.0.3
     hostname: roach1
     ports:
       - 8080:8080
@@ -14,7 +14,7 @@ services:
       roachnet:
 
   roach2:
-    image: cockroachdb/cockroach:v1.0.2
+    image: cockroachdb/cockroach:v1.0.3
     hostname: roach2
     volumes:
       - "${PWD}/data/roach2:/cockroach/cockroach-data"
@@ -25,7 +25,7 @@ services:
       - roach1
 
   roach3:
-    image: cockroachdb/cockroach:v1.0.2
+    image: cockroachdb/cockroach:v1.0.3
     hostname: roach3
     volumes:
       - "${PWD}/data/roach3:/cockroach/cockroach-data"
