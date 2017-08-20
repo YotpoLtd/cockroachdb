@@ -2,7 +2,7 @@ version: '2'
 services:
 
   roach1:
-    image: cockroachdb/cockroach:v1.0.3
+    image: cockroachdb/cockroach:v1.0.4
     hostname: roach1
     ports:
       - 8080:8080
@@ -14,7 +14,7 @@ services:
       roachnet:
 
   roach2:
-    image: cockroachdb/cockroach:v1.0.3
+    image: cockroachdb/cockroach:v1.0.4
     hostname: roach2
     volumes:
       - "${PWD}/data/roach2:/cockroach/cockroach-data"
@@ -25,7 +25,7 @@ services:
       - roach1
 
   roach3:
-    image: cockroachdb/cockroach:v1.0.3
+    image: cockroachdb/cockroach:v1.0.4
     hostname: roach3
     volumes:
       - "${PWD}/data/roach3:/cockroach/cockroach-data"
@@ -40,6 +40,6 @@ networks:
     ipam:
       driver: default
       config:
-      - subnet: 172.47.0.0/16
-        ip_range: 172.47.5.0/24
-        gateway: 172.47.0.1
+      - subnet: 172.31.0.0/16
+        ip_range: 172.31.5.0/24
+        gateway: 172.31.0.1
